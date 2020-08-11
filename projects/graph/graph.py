@@ -13,42 +13,76 @@ class Graph:
         """
         Add a vertex to the graph.
         """
-        pass  # TODO
+        if vertex_id not in self.vertices:
+            self.vertices[vertex_id] = set()
+        else:
+            raise IndexError("Vertex already exists")
 
     def add_edge(self, v1, v2):
         """
         Add a directed edge to the graph.
         """
-        pass  # TODO
+        if v1 in self.vertices and v2 in self.vertices:
+            self.vertices[v1].add(v2)
+        else:
+            raise IndexError(
+                "Both vertices must exist in order to add an edge")
 
     def get_neighbors(self, vertex_id):
         """
         Get all neighbors (edges) of a vertex.
         """
-        pass  # TODO
+        return self.vertices[vertex_id]
 
     def bft(self, starting_vertex):
         """
         Print each vertex in breadth-first order
         beginning from starting_vertex.
         """
-        pass  # TODO
+        q = Queue()
+        q.enqueue(starting_vertex)
+        
+        visited = set()
+
+        while q.size() > 0:
+            v = q.dequeue()
+            print(f"{v}")
+
+            if v not in visited:
+                visited.add(v)
+                print(v)
+
+                for next_vertex in self.get_neighbors(v):
+                    q.enqueue(next_vertex)
 
     def dft(self, starting_vertex):
         """
         Print each vertex in depth-first order
         beginning from starting_vertex.
         """
-        pass  # TODO
+        s = Stack()
+        s.push(starting_vertex)
 
-    def dft_recursive(self, starting_vertex):
+        visited = set()
+
+        while s.size > 0:
+            v = s.pop()
+
+            if v not in visited:
+                visited.add(v)
+                print(v)
+
+                for next_vertex in self.get_neighbors(v):
+                    s.push(next_vertex)
+
+    def dft_recursive(self, starting_vertex, visited=None):
         """
         Print each vertex in depth-first order
         beginning from starting_vertex.
 
         This should be done using recursion.
         """
-        pass  # TODO
+
 
     def bfs(self, starting_vertex, destination_vertex):
         """
