@@ -11,6 +11,8 @@ def earliest_ancestor(ancestors, starting_node):
             g.add_vertex(ancestor[1])
 
         g.add_edge(ancestor[1], ancestor[0])
+        # not directed
+        # g.add_edge(ancestor[0], ancestor[1])
 
     s = Stack()
     visited = set()
